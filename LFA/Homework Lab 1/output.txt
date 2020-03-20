@@ -1,0 +1,39 @@
+0 a       "Denied"
+0 aba       "Denied"
+1 aaabbb       "Accepted"
+1 bbba       "Accepted"
+0 aaa       "Denied"
+0 b       "Denied"
+1 bababa       "Accepted"
+
+Shortest 30 word(s):
+ab
+ba
+aaab
+aaba
+abaa
+abbb
+baaa
+babb
+bbab
+bbba
+aaaaab
+aaaaba
+aaabaa
+aaabbb
+aabaaa
+aababb
+aabbab
+aabbba
+abaaaa
+abaabb
+ababab
+ababba
+abbaab
+abbaba
+abbbaa
+abbbbb
+baaaaa
+baaabb
+baabab
+baabba
