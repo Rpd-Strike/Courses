@@ -1,0 +1,276 @@
+Tested different types of sorts:'
+
+Valori: [1, 1000000]  N = 10
+STL    Sort      ...  ..... .........  Corect  ...  0.000 s
+Radix  Sort      ...  ..... .........  Corect  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.000 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.000 s
+Count  Sort      ...  ..... .........  Corect  ...  0.012 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.000 s
+Bubble Sort      ...  ..... .........  Corect  ...  0.000 s
+
+Valori: [1, 1000000]  N = 100
+STL    Sort      ...  ..... .........  Corect  ...  0.000 s
+Radix  Sort      ...  ..... .........  Corect  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.000 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.000 s
+Count  Sort      ...  ..... .........  Corect  ...  0.012 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.000 s
+Bubble Sort      ...  ..... .........  Corect  ...  0.000 s
+
+Valori: [1, 1000000]  N = 1000
+STL    Sort      ...  ..... .........  Corect  ...  0.000 s
+Radix  Sort      ...  ..... .........  Corect  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.000 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.000 s
+Count  Sort      ...  ..... .........  Corect  ...  0.013 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.002 s
+Bubble Sort      ...  ..... .........  Corect  ...  0.028 s
+
+Valori: [1, 1000000]  N = 10000
+STL    Sort      ...  ..... .........  Corect  ...  0.004 s
+Radix  Sort      ...  ..... .........  Corect  ...  0.006 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.008 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.008 s
+Count  Sort      ...  ..... .........  Corect  ...  0.014 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.007 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.006 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.016 s
+Bubble Sort      ...  ..... .........  Corect  ...  2.492 s
+
+Valori: [1, 1000000]  N = 100000
+STL    Sort      ...  ..... .........  Corect  ...  0.057 s
+Radix  Sort      ...  ..... .........  Corect  ...  0.067 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.081 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.090 s
+Count  Sort      ...  ..... .........  Corect  ...  0.027 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.082 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.077 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.138 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  10.004 s
+
+Valori: [1, 1000000]  N = 1000000
+STL    Sort      ...  ..... .........  Corect  ...  0.626 s
+Radix  Sort      ...  ..... .........  Corect  ...  0.782 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.966 s
+Heap   Sort      ...  ..... .........  Corect  ...  1.211 s
+Count  Sort      ...  ..... .........  Corect  ...  0.159 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  1.023 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.962 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  1.569 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  10.033 s
+
+Valori: [1, 1000000]  N = 10000000
+STL    Sort      ...  ..... .........  Corect  ...  6.889 s
+Radix  Sort      ...  ..... .........  Corect  ...  7.866 s
+Merge  Sort      ...  ..... .........  Corect  ...  11.053 s
+Heap   Sort      ...  ..... .........  Corect  ...  17.738 s
+Count  Sort      ...  ..... .........  Corect  ...  1.411 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  12.687 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  12.570 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  25.128 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  10.294 s
+
+Valori: [1, 1000000]  N = 100000000
+STL    Sort      ...  ..... .........  Corect  ...  76.111 s
+Radix  Sort      ...  ..... .........  Corect  ...  76.538 s
+Merge  Sort      ...  ..... .........  Corect  ...  123.341 s
+Heap   Sort      ...  ..... .........  Corect  ...  226.556 s
+Count  Sort      ...  ..... .........  Corect  ...  12.352 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  282.439 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  280.186 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  408.015 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  13.318 s
+
+Valori: [-500000, 500000]  N = 10
+STL    Sort      ...  ..... .........  Corect  ...  0.000 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.000 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.000 s
+Count  Sort      ...  ..... .........  Corect  ...  0.012 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.000 s
+Bubble Sort      ...  ..... .........  Corect  ...  0.000 s
+
+Valori: [-500000, 500000]  N = 100
+STL    Sort      ...  ..... .........  Corect  ...  0.000 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.000 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.000 s
+Count  Sort      ...  ..... .........  Corect  ...  0.012 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.000 s
+Bubble Sort      ...  ..... .........  Corect  ...  0.000 s
+
+Valori: [-500000, 500000]  N = 1000
+STL    Sort      ...  ..... .........  Corect  ...  0.000 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.000 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.000 s
+Count  Sort      ...  ..... .........  Corect  ...  0.013 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.001 s
+Bubble Sort      ...  ..... .........  Corect  ...  0.024 s
+
+Valori: [-500000, 500000]  N = 10000
+STL    Sort      ...  ..... .........  Corect  ...  0.004 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.006 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.007 s
+Count  Sort      ...  ..... .........  Corect  ...  0.015 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.006 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.006 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.013 s
+Bubble Sort      ...  ..... .........  Corect  ...  2.498 s
+
+Valori: [-500000, 500000]  N = 100000
+STL    Sort      ...  ..... .........  Corect  ...  0.052 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.004 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.081 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.090 s
+Count  Sort      ...  ..... .........  Corect  ...  0.025 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.084 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.077 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.147 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  10.003 s
+
+Valori: [-500000, 500000]  N = 1000000
+STL    Sort      ...  ..... .........  Corect  ...  0.608 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.044 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.955 s
+Heap   Sort      ...  ..... .........  Corect  ...  1.119 s
+Count  Sort      ...  ..... .........  Corect  ...  0.141 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  1.068 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.945 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  1.665 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  10.012 s
+
+Valori: [-500000, 500000]  N = 10000000
+STL    Sort      ...  ..... .........  Corect  ...  6.819 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.439 s
+Merge  Sort      ...  ..... .........  Corect  ...  11.001 s
+Heap   Sort      ...  ..... .........  Corect  ...  16.038 s
+Count  Sort      ...  ..... .........  Corect  ...  1.237 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  13.046 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  12.640 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  25.665 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  10.186 s
+
+Valori: [-500000, 500000]  N = 100000000
+STL    Sort      ...  ..... .........  Corect  ...  75.179 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  4.423 s
+Merge  Sort      ...  ..... .........  Corect  ...  123.350 s
+Heap   Sort      ...  ..... .........  Corect  ...  223.926 s
+Count  Sort      ...  ..... .........  Corect  ...  12.354 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  282.423 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  280.701 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  414.361 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  13.326 s
+
+Valori: [-1000000000, 1000000000]  N = 10
+STL    Sort      ...  ..... .........  Corect  ...  0.000 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.000 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.000 s
+Count  Sort      ...  ..... Values from given vector too big for CountSort  .........  Pe langa  ...  0.000 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.000 s
+Bubble Sort      ...  ..... .........  Corect  ...  0.000 s
+
+Valori: [-1000000000, 1000000000]  N = 100
+STL    Sort      ...  ..... .........  Corect  ...  0.000 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.000 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.000 s
+Count  Sort      ...  ..... Values from given vector too big for CountSort  .........  Pe langa  ...  0.000 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.000 s
+Bubble Sort      ...  ..... .........  Corect  ...  0.000 s
+
+Valori: [-1000000000, 1000000000]  N = 1000
+STL    Sort      ...  ..... .........  Corect  ...  0.000 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.000 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.000 s
+Count  Sort      ...  ..... Values from given vector too big for CountSort  .........  Pe langa  ...  0.000 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.000 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.001 s
+Bubble Sort      ...  ..... .........  Corect  ...  0.024 s
+
+Valori: [-1000000000, 1000000000]  N = 10000
+STL    Sort      ...  ..... .........  Corect  ...  0.004 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.000 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.006 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.007 s
+Count  Sort      ...  ..... Values from given vector too big for CountSort  .........  Pe langa  ...  0.000 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.006 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.006 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.015 s
+Bubble Sort      ...  ..... .........  Corect  ...  2.515 s
+
+Valori: [-1000000000, 1000000000]  N = 100000
+STL    Sort      ...  ..... .........  Corect  ...  0.052 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.004 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.082 s
+Heap   Sort      ...  ..... .........  Corect  ...  0.090 s
+Count  Sort      ...  ..... Values from given vector too big for CountSort  .........  Pe langa  ...  0.004 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.081 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.078 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  0.152 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  10.001 s
+
+Valori: [-1000000000, 1000000000]  N = 1000000
+STL    Sort      ...  ..... .........  Corect  ...  0.624 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.045 s
+Merge  Sort      ...  ..... .........  Corect  ...  0.979 s
+Heap   Sort      ...  ..... .........  Corect  ...  1.173 s
+Count  Sort      ...  ..... Values from given vector too big for CountSort  .........  Pe langa  ...  0.044 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  0.995 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  0.921 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  1.698 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  10.043 s
+
+Valori: [-1000000000, 1000000000]  N = 10000000
+STL    Sort      ...  ..... .........  Corect  ...  7.124 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  0.440 s
+Merge  Sort      ...  ..... .........  Corect  ...  11.014 s
+Heap   Sort      ...  ..... .........  Corect  ...  16.206 s
+Count  Sort      ...  ..... Values from given vector too big for CountSort  .........  Pe langa  ...  0.440 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  11.781 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  10.752 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  19.340 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  10.304 s
+
+Valori: [-1000000000, 1000000000]  N = 100000000
+STL    Sort      ...  ..... .........  Corect  ...  80.631 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  4.403 s
+Merge  Sort      ...  ..... .........  Corect  ...  124.560 s
+Heap   Sort      ...  ..... .........  Corect  ...  227.614 s
+Count  Sort      ...  ..... Values from given vector too big for CountSort  .........  Pe langa  ...  4.396 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  132.817 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  125.480 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  208.583 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  13.370 s
+
+Valori: [-1000000000, 1000000000]  N = 500000000
+STL    Sort      ...  ..... .........  Corect  ...  444.227 s
+Radix  Sort      ...  ..... Negative values don't work with Radix Sort  .........  Pe langa  ...  22.205 s
+Merge  Sort      ...  ..... .........  Corect  ...  688.269 s
+Heap   Sort      ...  ..... .........  Corect  ...  1495.912 s
+Count  Sort      ...  ..... Values from given vector too big for CountSort  .........  Pe langa  ...  22.075 s
+Quick  Sort - 1  ...  ..... .........  Corect  ...  741.321 s
+Quick  Sort - 3  ...  ..... .........  Corect  ...  666.354 s
+Quick  Sort - 5  ...  ..... .........  Corect  ...  1095.607 s
+Bubble Sort      ...  ..... Timed out!  .........  Pe langa  ...  22.036 s
