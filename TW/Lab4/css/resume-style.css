@@ -1,0 +1,216 @@
+.title
+{
+  margin: 0px;
+  font-family: 'Lato';
+  font-size: 38px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.subtitle {
+  color: #999;
+  margin-bottom: 1px;
+  font-family: 'Lato';
+  font-size: 1.5em;
+  line-height: 1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.menu {
+  width: 990px;
+  margin: 80px auto 0 auto;
+  text-align: center;
+}
+
+.menu--light {
+  margin: 30px auto 0 auto;
+}
+
+.menu-item {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 20px;
+  padding: 10px 40px 10px 40px;
+  background: white;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  outline: none;
+  color: #888;
+  vertical-align: bottom;
+}
+.menu-item-active {
+  position: relative;
+  bottom: -1px;
+  color: #c0392b;
+  padding: 15px 40px 15px 40px;
+  margin-top: 0;
+}
+
+hr {
+  margin-top: 25px;
+  border: 1px solid #f1f1f1;
+}
+
+main.resume-content:first-child {
+  margin-right: 1em;
+}
+
+.resume-info {
+  line-height: 1;
+}
+
+.resume-date {
+  text-align: end;
+  position: relative;
+  bottom: 2.3rem;
+}
+
+.resume-date span {
+  border-radius: 7px;
+  padding: 0px 4px 0px 4px;
+  vertical-align: middle;
+  font-size: 0.85em;
+  color: white;
+}
+
+.resume-date.blue span {
+  background-color: rgb(117, 159, 223);
+}
+
+.resume-date.red span {
+  background-color: #c0392b;
+}
+
+.resume-date.green span {
+  background-color: forestgreen;
+}
+
+.resume-date.orange span {
+  background-color: coral;
+}
+
+main section div, main section p {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+/* Skills coloring */
+
+ul.skills {
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+.resume-aside {
+  width: 42.5%;
+}
+
+ul.skills .skills-item span {
+  width: 5em;
+  
+}
+
+ul.skills .skills-item {
+  border-radius: 6px;
+  padding: 0.11em;
+  margin-bottom: 20px;
+  text-indent: 0.25em;
+  color: white;
+}
+
+li.skills-item:nth-child(1) {
+  width: 245px;
+}
+
+li.skills-item:nth-child(2) {
+  width: 190px;
+}
+
+li.skills-item:nth-child(3) {
+  width: 150px;
+}
+
+li.skills-item:nth-child(4) {
+  width: 200px;
+}
+
+li.skills-item:nth-child(5) {
+  width: 80px;
+}
+
+li.skills-item:nth-child(6) {
+  width: 180px;
+}
+
+li.skills-item:nth-child(7) {
+  width: 210px;
+}
+
+ul.skills .skills-item.green {
+  background-color: rgba(54, 202, 17, 0.603);
+  background-image: linear-gradient(135deg,
+    rgba(90, 194, 64, 0.678) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(90, 194, 64, 0.582) 50%,
+    rgba(90, 194, 64, 0.582) 75%,
+    transparent 75%,
+    transparent); 
+  background-size: 3.2rem 3.2rem;
+}
+
+ul.skills .skills-item.orange {
+  background-color: rgba(209, 110, 29, 0.699);
+  background-image: linear-gradient(135deg,
+    rgba(219, 91, 40, 0.63) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(219, 91, 40, 0.63) 50%,
+    rgba(219, 91, 40, 0.63) 75%,
+    transparent 75%,
+    transparent); 
+  background-size: 3.2rem 3.2rem;
+}
+
+ul.skills .skills-item.purple {
+  background-color: rgba(171, 17, 209, 0.603);
+  background-image: linear-gradient(135deg,
+    rgba(138, 17, 175, 0.596) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(138, 17, 175, 0.596) 50%,
+    rgba(138, 17, 175, 0.596) 75%,
+    transparent 75%,
+    transparent); 
+  background-size: 3.2rem 3.2rem;
+}
+
+ul.skills .skills-item.black {
+  background-color: rgba(43, 43, 43, 0.548);
+  background-image: linear-gradient(135deg,
+    rgba(102, 102, 102, 0.63) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(102, 102, 102, 0.63) 50%,
+    rgba(102, 102, 102, 0.63) 75%,
+    transparent 75%,
+    transparent); 
+  background-size: 3.2rem 3.2rem;
+}
+
+ul.skills .skills-item.red {
+  background-color: rgba(212, 72, 72, 0.712);
+  background-image: linear-gradient(135deg,
+    rgba(228, 42, 42, 0.521) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(228, 42, 42, 0.521) 50%,
+    rgba(228, 42, 42, 0.521) 75%,
+    transparent 75%,
+    transparent); 
+  background-size: 3.2rem 3.2rem;
+}
