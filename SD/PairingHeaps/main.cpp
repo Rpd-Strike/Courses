@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main()
+void MyTest()
 {
     auto ptree = PairingHeap::Build({5, 8, 1});
     auto doi = PairingHeap::Build({6, 9});
@@ -39,10 +39,38 @@ int main()
         if (tree.GetSize() > 0)
             tree.DeleteMin();
     }
+}
 
-
-
-    //  delete doi;
-
+int main()
+{
+    // MyTest();
+    
+    /// Interactive Mode!
+    PairingHeap heap;
+    cout << "Number of operations: ";
+    int ops;
+    cin >> ops;
+    while (ops-- > 0) {
+        int type, val;
+        cin >> type;
+        if (type == 1 || type == 2) {
+            cin >> val;
+            if (type == 1) {
+                heap.Insert(val);
+                cout << "Inserted value " << val << '\n';
+            }
+            else {
+                heap.DeleteVal(val);
+                cout << "Deleted value " << val << '\n';
+            }
+        }
+        else if (type == 3) {
+            cout << "Minimum value: " << heap.GetMin() << '\n';
+        }
+        else if (type == 4) {
+            heap.DeleteMin();
+            cout << "Deleted minimum value\n";
+        }
+    }
     return 0;
 }
