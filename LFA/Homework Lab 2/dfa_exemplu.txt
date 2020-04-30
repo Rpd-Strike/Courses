@@ -1,3 +1,31 @@
+// BEST Lambda NFA Example 
+// Accepts odd nr of b's and even nr of a's
+9
+2
+3 3
+1
+1
+16
+0 1 a
+1 0 a
+0 4 a
+4 0 a
+1 3 b
+3 1 b
+4 3 b
+3 4 b
+0 2 b
+2 0 b
+2 3 a
+3 2 a
+4 1 #
+4 6 #
+4 7 c
+8 0 #
+
+/// END EXAMPLE
+
+
 8
 0
 1
