@@ -1,0 +1,77 @@
+--1
+SELECT cust_id, cust_name
+FROM customer_TBL
+WHERE   cust_state IN ('IN', 'OH', 'MI', 'IL')
+    AND (   UPPER(cust_name) LIKE 'A%'
+         OR UPPER(cust_name) LIKE 'B%')
+ORDER BY cust_name;
+
+--2
+SELECT prod_id, prod_desc, cost
+FROM products_T
+WHERE cost >= 1 AND cost <= 12.5;
+
+--2
+SELECT prod_id, prod_desc, cost
+FROM products_TBL
+WHERE cost < 1 OR cost > 12.5;
+
+--3
+SELECT LOWER(first_name) || '.' || LOWER(last_name) || '@ittech.com' as "E-mail"
+FROM employee_tbl
+ORDER BY "E-mail";
+
+--4
+SELECT 'NAME = ' || last_name || ', ' || first_name || CHR(13)
+     || 'EMP_ID = ' || SUBSTR(emp_id, 0, 3) || '-' || SUBSTR(emp_id, 3, 2) || '-' || SUBSTR(emp_id, 5, 4) || CHR(13)
+     || 'PHONE = (' || SUBSTR(phone, 0, 3) || ')' || SUBSTR(phone, 3, 3) || '-' || SUBSTR(phone, 6, 4) || CHR(13)
+        as "Employee"
+FROM employee_TBL;
+
+--5
+SELECT emp_id, TO_CHAR(date_hire, 'YYYY') as "Anul angajarii"
+FROM employee_pay_tbl
+ORDER BY "Anul angajarii" ASC;
+
+--6
+SELECT e.emp_id, e.last_name, e.first_name, p.salary, p.bonus
+FROM employee_tbl e FULL JOIN employee_pay_tbl p
+ON e.emp_id = p.emp_id;
+
+--7
+SELECT c.cust_name, o.ord_num, o.ord_date
+FROM orders_tbl o LEFT JOIN customer_tbl c ON o.cust_id = c.cust_id
+WHERE UPPER(c.cust_state) LIKE 'I%';
+
+--8
+SELECT o.ord_num, o.qty, e.first_name, e.last_name, e.city
+FROM orders_tbl o LEFT JOIN employee_tbl e ON o.sales_rep = e.emp_id;
+
+--9
+SELECT o.ord_num, o.qty, e.first_name, e.last_name, e.city
+FROM orders_tbl o FULL JOIN employee_tbl e ON o.sales_rep = e.emp_id;
+
+--10
+SELECT *
+FROM employee_tbl
+WHERE middle_name is NULL;
+
+--11
+SELECT emp_id, NVL(salary, 0) * 12 + NVL(bonus, 0) as "Annual Salary"
+FROM employee_pay_tbl
+ORDER BY "Annual Salary" DESC;
+
+--12
+SELECT e.last_name, p.salary, p.position,
+    (CASE 
+        WHEN LOWER(p.position) = 'marketing' THEN 1.10
+        WHEN LOWER(p.position) = 'salesman' THEN 1.15
+        ELSE 1.0
+    END) * p.salary as "Salariu modificat"
+FROM employee_tbl e LEFT JOIN employee_pay_tbl p ON e.emp_id = p.emp_id;
+
+SELECT e.last_name, p.salary, p.position, 
+    DECODE(LOWER(p.position), 'marketing', 1.10,
+                       'salesman', 1.15,
+                       1.0) * p.salary as "Salariu Modificat"
+FROM employee_tbl e LEFT JOIN employee_pay_tbl p ON e.emp_id = p.emp_id;

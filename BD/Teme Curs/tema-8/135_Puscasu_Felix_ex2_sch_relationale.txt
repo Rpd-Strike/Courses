@@ -1,0 +1,35 @@
+Schema relationala Platforma e-learning
+
+Semestru
+#id_semestru, data_inceput, data_sfarsit, an_academic, nr_semestru
+
+Nota
+#id_inrolare, nota
+
+Student
+#id_student, nume, prenume
+
+Inrolare
+#id_student, #id_sustinere
+
+Orar_Studiu
+#id_ora_studiu, id_sustinere, id_ora_studiu, id_semestru,
+  ora_inceput, durata, zi_saptamana
+
+Sustinere_Curs
+#id_sustinere, id_curs, id_profesor, id_semestru
+
+Curs
+#id_curs, nume_curs, tip, id_profesor
+
+Profesor
+#id_profesor, nume, prenume, titlu
+
+Orar_Studiu
+#id_ora, id_curs, tip
+
+Material
+#id_student, #id_ora_studiu, tip_material, denumire, continut
+
+Examen
+#id_sustinere, data, ora

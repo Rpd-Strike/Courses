@@ -1,0 +1,311 @@
+--- Tema Laborator 1 -- Baze de Date -- Puscasu Felix -- 135
+
+- Partea I
+
+1.
+SELECT COUNT(*)
+FROM employees
+WHERE LOWER(first_name) LIKE 'k%';
+
+    "COUNT(*)"
+    7
+
+
+2.
+SELECT employee_id, first_name, last_name
+FROM (SELECT employee_id, first_name, last_name
+      FROM employees
+      ORDER BY salary)
+WHERE ROWNUM = 1;
+
+    "EMPLOYEE_ID"    "FIRST_NAME"     "LAST_NAME"                   
+    "132"            "TJ"             "Olson"                       
+
+
+3.
+SELECT DISTINCT e.employee_id, e.last_name, e.first_name
+FROM employees e
+WHERE e.employee_id IN (SELECT manager_id
+                        FROM employees
+                        WHERE department_id = 30)
+ORDER BY last_name, first_name;
+
+    "EMPLOYEE_ID"    "LAST_NAME"      "FIRST_NAME"                  
+    "100"            "King"           "Steven"                      
+    "114"            "Raphaely"       "Den"                         
+
+
+4.
+SELECT employee_id, last_name, first_name, (SELECT COUNT(*)
+                                            FROM employees
+                                            WHERE manager_id = e.employee_id) as "numar subalterni"
+FROM employees e;
+
+
+5.
+SELECT employee_id, last_name, first_name
+FROM employees e
+WHERE (SELECT COUNT(*)
+       FROM employees
+       WHERE employee_id != e.employee_id AND e.last_name = last_name) > 0;
+
+    "EMPLOYEE_ID"    "LAST_NAME"      "FIRST_NAME"                  
+    "100"            "King"           "Steven"                      
+    "148"            "Cambrault"      "Gerald"                      
+    "154"            "Cambrault"      "Nanette"                     
+    "156"            "King"           "Janette"                     
+    "159"            "Smith"          "Lindsey"                     
+    "171"            "Smith"          "William"                     
+    "176"            "Taylor"         "Jonathon"                    
+    "178"            "Grant"          "Kimberely"                   
+    "180"            "Taylor"         "Winston"                     
+    "199"            "Grant"          "Douglas"                     
+
+
+6.
+SELECT department_id, department_name
+FROM departments d
+WHERE (SELECT COUNT(DISTINCT job_id)
+       FROM employees
+       WHERE department_id = d.department_id) > 1;
+
+    "DEPARTMENT_ID"     "DEPARTMENT_NAME"             
+    "20"                "Marketing"                   
+    "30"                "Purchasing"                  
+    "50"                "Shipping"                    
+    "80"                "Sales"                       
+    "90"                "Executive"                   
+    "100"               "Finance"                     
+    "110"               "Accounting"                  
+
+
+- Partea II
+
+7.
+SELECT prod_id, prod_desc, (SELECT SUM(qty)
+                            FROM orders_tbl
+                            WHERE prod_id = p.prod_id
+                            GROUP BY prod_id) as "CANTITATE"
+FROM products_tbl p
+WHERE LOWER(prod_desc) LIKE '%plastic%';
+
+    "PROD_ID"    "PROD_DESC"                   "CANTITATE"                   
+    "222"        "PLASTIC PUMPKIN 18 INCH"     "27"                          
+    "87"         "PLASTIC SPIDERS"             "100"                         
+
+
+8.
+(SELECT last_name || ' ' || first_name "Nume", 'Angajat' "Tip"
+FROM employee_tbl
+UNION 
+SELECT cust_name "Nume", 'Client' "Tip"
+FROM customer_tbl)
+ORDER BY "Tip", "Nume";
+
+    "Nume"                         "Tip"                         
+    "GLASS BRANDON"                "Angajat"                     
+    "GLASS JACOB"                  "Angajat"                     
+    "PLEW LINDA"                   "Angajat"                     
+    "SPURGEON TIFFANY"             "Angajat"                     
+    "STEPHENS TINA"                "Angajat"                     
+    "WALLACE MARIAH"               "Angajat"                     
+    "ANDYS CANDIES"                "Client"                      
+    "ANGELA DOBKO"                 "Client"                      
+    "GAVINS PLACE"                 "Client"                      
+    "HEATHERS FEATHERS AND THINGS" "Client"                      
+    "HOLLYS GAMEARAMA"             "Client"                      
+    "JASONS AND DALLAS GOODIES"    "Client"                      
+    "LESLIE GLEASON"               "Client"                      
+    "MARYS GIFT SHOP"              "Client"                      
+    "MORGANS CANDIES AND TREATS"   "Client"                      
+    "NANCY BUNKER"                 "Client"                      
+    "REGANS HOBBIES INC"           "Client"                      
+    "RYANS STUFF"                  "Client"                      
+    "SCHYLERS NOVELTIES"           "Client"                      
+    "SCOTTYS MARKET"               "Client"                      
+    "WENDY WOLF"                   "Client"         
+
+             
+9.
+SELECT p.prod_desc
+FROM products_tbl p JOIN orders_tbl s USING (prod_id)
+WHERE s.sales_rep IN (SELECT s.sales_rep
+                      FROM orders_tbl s JOIN products_tbl p USING (prod_id)
+                      WHERE prod_desc LIKE '% P%');
+
+    "PROD_DESC"                   
+    "WITCHES COSTUME"             
+    "PLASTIC PUMPKIN 18 INCH"     
+    "PLASTIC PUMPKIN 18 INCH"     
+    "FALSE PARAFFIN TEETH"        
+    "PLASTIC SPIDERS"          
+
+
+10.
+SELECT DISTINCT cust_name
+FROM customer_tbl c
+WHERE (SELECT COUNT(*)
+       FROM orders_tbl
+       WHERE cust_id = c.cust_id AND EXTRACT(day from ord_date) = 17) > 0;
+
+    "CUST_NAME"                   
+    "WENDY WOLF"                  
+    "GAVINS PLACE"                
+
+
+11.
+SELECT last_name, first_name, bonus
+FROM employee_pay_tbl ep, employee_tbl et
+WHERE et.emp_id = ep.emp_id AND salary < 32000 AND bonus * 17 < 32000;
+
+    "LAST_NAME"     "FIRST_NAME"    "BONUS"                       
+    "GLASS"         "JACOB"         "1000"                        
+
+
+12.
+SELECT last_name, first_name, NVL(SUM(o.qty), 0)
+FROM employee_tbl e LEFT JOIN orders_tbl o ON o.sales_rep = e.emp_id
+GROUP BY e.emp_id, e.last_name, e.first_name
+HAVING SUM(o.qty) > 50 OR NVL(SUM(o.qty), 0) = 0;
+
+    "LAST_NAME"    "FIRST_NAME"   "Cantitate"                   
+    "STEPHENS"     "TINA"         "0"                           
+    "GLASS"        "BRANDON"      "103"                         
+    "SPURGEON"     "TIFFANY"      "0"                           
+    "WALLACE"      "MARIAH"       "0"                          
+
+
+13.
+SELECT last_name, first_name, salary, MAX(ord_date)
+FROM (employee_tbl e JOIN employee_pay_tbl p ON e.emp_id = p.emp_id) JOIN orders_tbl o
+ON e.emp_id = o.sales_rep
+GROUP BY last_name, first_name, salary, o.sales_rep;
+
+    "LAST_NAME"   "FIRST_NAME"  "SALARY"   "MAX(ORD_DATE)"               
+    "GLASS"       "JACOB"       "20000"    "15-OCT-99"                   
+    "GLASS"       "BRANDON"     "30000"    "22-OCT-99"                   
+    "PLEW"        "LINDA"       ""         "17-OCT-99"              
+
+
+14.
+SELECT prod_desc
+FROM products_tbl
+WHERE cost > (SELECT AVG(cost)
+              FROM products_tbl);
+
+    "PROD_DESC"                   
+    "WITCHES COSTUME"             
+    "LIGHTED LANTERNS"            
+    "ASSORTED COSTUMES"           
+
+
+15.
+SELECT last_name, first_name, salary, bonus, 
+        (SELECT SUM(salary) FROM employee_pay_tbl) as "Salariu total",
+        (SELECT SUM(bonus) FROM employee_pay_tbl) as "Bonus total"
+FROM employee_tbl e, employee_pay_tbl p
+WHERE e.emp_id = p.emp_id;
+
+    "LAST_NAME"  "FIRST_NAME"  "SALARY"   "BONUS"  "Salariu total"  "Bonus total"                 
+    "STEPHENS"   "TINA"        "40000"    ""       "90000"          "3000"                        
+    "PLEW"       "LINDA"       ""         ""       "90000"          "3000"                        
+    "GLASS"      "BRANDON"     "30000"    "2000"   "90000"          "3000"                        
+    "GLASS"      "JACOB"       "20000"    "1000"   "90000"          "3000"                        
+    "WALLACE"    "MARIAH"      ""         ""       "90000"          "3000"                        
+    "SPURGEON"   "TIFFANY"     ""         ""       "90000"          "3000"                        
+
+
+16.
+SELECT DISTINCT city
+FROM employee_Tbl e
+WHERE (SELECT COUNT(1)
+       FROM orders_tbl
+       WHERE sales_rep = e.emp_id) >=
+      (SELECT MAX(COUNT(1))
+       FROM orders_tbl
+       GROUP BY sales_rep);
+
+    "CITY"                        
+    "WHITELAND"                   
+
+
+17.
+SELECT emp_id, last_name, COUNT(DECODE(TO_CHAR(ord_date, 'mm'), 9, 1)) "Sept",
+                          COUNT(DECODE(TO_CHAR(ord_date, 'mm'), 10, 1)) "Oct"
+FROM employee_tbl e LEFT JOIN orders_tbl o
+ON emp_id = sales_rep
+GROUP BY emp_id, last_name;
+
+    "EMP_ID"      "LAST_NAME"   "Sept"   "Oct"                         
+    "313782439"   "GLASS"       "0"      "2"                           
+    "311549902"   "STEPHENS"    "0"      "0"                           
+    "443679012"   "SPURGEON"    "0"      "0"                           
+    "213764555"   "GLASS"       "1"      "2"                           
+    "220984332"   "WALLACE"     "0"      "0"                           
+    "442346889"   "PLEW"        "0"      "1"                           
+
+
+18.
+SELECT cust_name, cust_city
+FROM customer_tbl c
+WHERE cust_id NOT IN (SELECT cust_id FROM orders_tbl) AND REGEXP_LIKE(cust_address, '^[0-9]');
+
+    "CUST_NAME"                   "CUST_CITY"                   
+    "RYANS STUFF"                 "INDIANAPOLIS"                
+    "HOLLYS GAMEARAMA"            "WHITELAND"                   
+    "MORGANS CANDIES AND TREATS"  "INDIANAPOLIS"                
+    "REGANS HOBBIES INC"          "PLAINFIELD"                  
+    "HEATHERS FEATHERS AND THINGS""INDIANAPOLIS"       
+
+
+19.
+SELECT DISTINCT e.emp_id, last_name, city, c.cust_id, cust_name, cust_city
+FROM employee_tbl e, customer_tbl c
+WHERE EXISTS (SELECT 1
+              FROM orders_tbl
+              WHERE sales_rep = e.emp_id AND cust_id = c.cust_id)
+             AND city != cust_city;
+
+    "EMP_ID"      "LAST_NAME"   "CITY"           "CUST_ID"   "CUST_NAME"           "CUST_CITY"                   
+    "213764555"   "GLASS"       "WHITELAND"      "232"       "LESLIE GLEASON"      "INDIANAPOLIS"                
+    "213764555"   "GLASS"       "WHITELAND"      "090"       "WENDY WOLF"          "INDIANAPOLIS"                
+    "213764555"   "GLASS"       "WHITELAND"      "12"        "MARYS GIFT SHOP"     "DANVILLE"                    
+    "313782439"   "GLASS"       "INDIANAPOLIS"   "432"       "SCOTTYS MARKET"      "BROWNSBURG"                  
+    "313782439"   "GLASS"       "INDIANAPOLIS"   "43"        "SCHYLERS NOVELTIES"  "LEBANON"                     
+
+20.
+SELECT AVG(NVL(salary, 0)) as "Average salary"
+FROM employee_pay_tbl;
+
+    "Average salary"              
+    "15000"             
+
+21. a) ---- DA
+SELECT CUST_ID, CUST_NAME  
+FROM CUSTOMER_TBL
+WHERE CUST_ID = (SELECT CUST_ID
+                 FROM ORDERS_TBL
+                 WHERE ORD_NUM = '16C17');
+
+b) ---- NU
+SELECT EMP_ID, SALARY  
+FROM EMPLOYEE_PAY_TBL
+WHERE SALARY BETWEEN '20000' AND (SELECT SALARY
+                                  FROM EMPLOYEE_ID
+                                  WHERE SALARY = '40000');
+
+22.
+SELECT last_name, pay_rate
+FROM employee_tbl e, employee_pay_tbl p
+WHERE e.emp_id = p.emp_id
+AND pay_rate > (SELECT MAX(pay_rate)
+                FROM employee_tbl e2, employee_pay_tbl p2
+                WHERE e2.emp_id = p2.emp_id
+                AND UPPER(last_name) like '%LL%');
+
+    "LAST_NAME"   "PAY_RATE"                    
+    "PLEW"        "14.75"                       
+    "SPURGEON"    "15"                          
+
+
+

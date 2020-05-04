@@ -1,0 +1,2 @@
+F = PROJECT(SELECT(Filiala, id# = 15), id#)
+A = SELECT(Proprietate, chirie > 1000)

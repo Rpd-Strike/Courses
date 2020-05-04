@@ -1,0 +1,45 @@
+-- Tema Lab 3
+
+-- ex1
+-- arbore normal
+select titlu, valoare
+from (
+    select cod_opera, titlu, valoare
+    from
+        (select *
+         from colectie
+         where proprietar = 'VV')
+        NATURAL JOIN
+        (select *
+         from opera
+         where cod_galerie = 'G1')
+    
+    INTERSECT
+    
+    select tb.*
+    from
+        (select cod_opera
+         from restaureaza
+         where data > to_date('15-JUN-2000', 'DD-MM-YYYY')) 
+        NATURAL JOIN
+        (select cod_opera, titlu, valoare
+         from opera) tb
+);
+
+--arbore optimizat
+select titlu, valoare
+from (
+    select l.*
+    from (
+        (select o.cod_opera, o.titlu, o.valoare, o.cod_colectie
+         from opera o JOIN colectie c on o.cod_colectie = c.cod_colectie
+         where o.cod_galerie = 'G1' and c.proprietar = 'VV'
+        ) l
+        JOIN
+        (select cod_opera
+         from restaureaza
+         where data > to_date('15-JUN-2000', 'DD-MM-YYYY')) r
+         on l.cod_opera = r.cod_opera
+    )
+);
+

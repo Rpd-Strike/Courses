@@ -1,0 +1,42 @@
+1. -- Presupunem ca ni se cer informatiile studentului John Wick
+
+SELECT id_curs, nume_curs
+FROM Curs
+WHERE id_curs IN 
+    (SELECT c.id_curs 
+     FROM Curs c JOIN Sustinere_Curs s ON (c.id_curs = s.id_curs)
+                 JOIN Inrolare i ON (s.id_sustinere = i.id_sustinere)
+                 JOIN Student st ON (st.id_student = i.id_student)
+     WHERE st.nume = "John" AND st.prenume = "Wick")
+
+
+2. -- Presupunem ca dorim informatiile studentului cu un anume id
+    si pentru laboratoarele unui anumit curs
+
+SELECT DISTINCT *
+FROM Material m JOIN Ora_Studiu o ON (m.id_ora_studiu = o.id_ora)
+WHERE o.tip = "laborator" AND o.id_curs = given_course_id
+
+
+3. -- Presupunem ca vrem notele studentului student_id
+
+SELECT n.nota
+FROM Student s JOIN Inrolare i ON (i.id_student = s.id_student)
+               JOIN Nota ON (n.id_inrolare = i.id_inrolare)
+WHERE s.id_student = given_student_id
+
+
+4. -- Presupunem ca vrem sa aflam datele examenelor dintr-un anumit semestru
+
+SELECT e.*
+FROM Examen e JOIN Sustinere_Curs s ON (s.id_sustinere = e.id_sustinere)
+              JOIN Semestru sem ON (sem.id_semestru = s.id_semestru)
+WHERE sem.an_academic = "2019-2020" AND sem.nr_semestru = "2"
+
+   -- Presupunem ca vrem sa aflam datele cursurilor unui anumit semestru
+
+SELECT Curs.*, orar.*
+FROM Orar_Studiu orar JOIN Semestru s ON (s.id_semestru = orar.id_semestru)
+                      JOIN Sustinere_Curs c ON (c.id_semestru = s.id_semestru)
+                      JOIN Curs ON (Curs.id_crs = c.id_curs)
+WHERE sem.an_academic = "2019-2020" AND sem.nr_semestru = "2"

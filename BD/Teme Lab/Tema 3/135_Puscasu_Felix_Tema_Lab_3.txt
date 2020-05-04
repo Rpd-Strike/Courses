@@ -1,0 +1,133 @@
+--Laborator tema 3
+--1
+WITH brown_id as 
+    (select f_id from faculty where f_last='Brown')
+SELECT s_id "Cod", s_last || ' ' || s_first as "Student sau curs", 'Student' "Tip"
+FROM STUDENT
+WHERE f_id IN (SELECT * FROM brown_id)
+UNION
+SELECT course_no "Cod", course_name "Student sau curs", 'Curs'
+FROM course
+WHERE course_no IN (SELECT course_no
+                    FROM course_section
+                    WHERE f_id IN (SELECT f_id FROM faculty WHERE f_last='Brown'));
+--2
+WITH db_sections AS
+  (SELECT c_sec_id 
+   FROM course_section
+   WHERE upper(course_no) LIKE 'MIS%'),
+     cs_sections AS
+  (SELECT c_sec_id 
+   FROM course_section
+   WHERE upper(course_no) LIKE 'CS%')
+SELECT s.s_id, s.s_last, s.s_first
+FROM Student s
+WHERE (SELECT COUNT(*)
+    FROM Enrollment e
+    WHERE e.c_sec_id IN (SELECT * FROM db_sections) AND e.s_id = s.s_id) > 0
+  AND
+     (SELECT COUNT(*)
+    FROM Enrollment e
+    WHERE e.c_sec_id IN (SELECT * FROM cs_sections) AND e.s_id = s.s_id) = 0;
+
+--3
+SELECT s.s_id, s.s_last, s.s_first
+FROM Student s
+WHERE (SELECT SUM(DECODE(NVL(grade, 'C'), 'C', 1, 0))
+       FROM Enrollment e
+       WHERE e.s_id = s.s_id) > 0;
+
+--4
+SELECT l.loc_id, l.bldg_code, l.capacity
+FROM Location l
+WHERE (SELECT COUNT(*)
+       FROM Location l2
+       WHERE l2.capacity > l.capacity) < 1;
+
+--5
+SELECT MIN(id) + 1 "Min and Max"
+FROM T
+WHERE id + 1 not in (SELECT id FROM T)
+UNION 
+SELECT MAX(id) - 1
+FROM T
+WHERE id - 1 not in (SELECT id FROM T);
+       
+--6
+SELECT f.f_id, f.f_last, 
+    DECODE((SELECT COUNT(*) FROM Student s WHERE s.f_id = f.f_id), 
+           0, 'NU', 
+              'DA (' || (SELECT COUNT(*) FROM Student s WHERE s.f_id = f.f_id) || ')'
+          ) AS "Student", 
+    DECODE((SELECT COUNT(DISTINCT course_no) FROM course_section c WHERE c.f_id = f.f_id), 
+            0, 'NU', 
+               'DA (' || (SELECT COUNT(DISTINCT course_no) FROM course_section c WHERE c.f_id = f.f_id) || ')' 
+          ) AS "Curs"
+FROM Faculty f;
+
+--7
+SELECT a.term_desc, b.term_desc
+FROM term a CROSS JOIN term b
+WHERE a.term_desc < b.term_desc AND
+      SUBSTR(a.term_desc, 0, LENGTH(a.term_desc) - 1) = SUBSTR(b.term_desc, 0, LENGTH(b.term_desc) - 1)
+      AND a.term_desc != b.term_desc;
+
+--8
+SELECT DISTINCT s.s_id, s.s_last, s.s_first, c1.course_no, c2.course_no
+FROM Student s JOIN Course_section c1 ON (c1.c_sec_id IN (SELECT c_sec_id FROM Enrollment e WHERE e.s_id = s.s_id))
+               JOIN Course_section c2 ON (c2.c_sec_id IN (SELECT c_sec_id FROM Enrollment e WHERE e.s_id = s.s_id))
+WHERE (SUBSTR(c1.course_no, 1, 4) || SUBSTR(c1.course_no, 6, 10)) = (SUBSTR(c2.course_no, 1, 4) || SUBSTR(c2.course_no, 6, 10))
+      AND c1.course_no != c2.course_no
+      AND c1.course_no < c2.course_no;
+
+--9
+SELECT a.c_sec_id, b.c_sec_id
+FROM course_section a JOIN course_section b ON (a.term_id = b.term_id)
+WHERE a.c_sec_id > b.c_sec_id
+ORDER BY a.c_sec_id, b.c_sec_id;
+
+--10
+SELECT c.c_sec_id, c.course_no, t.term_desc, c.max_enrl
+FROM course_section c JOIN Term t ON (c.term_id = t.term_id)
+WHERE c.max_enrl < (SELECT MIN(a.max_enrl) FROM course_section a WHERE a.loc_id = 1);
+
+--11
+SELECT DISTINCT cc.course_name, c.max_enrl
+FROM Course_section c JOIN Course cc ON (cc.course_no = c.course_no)
+WHERE (SELECT COUNT(*)
+       FROM Course_section 
+       WHERE max_enrl < c.max_enrl) < 1;
+
+--12
+SELECT f.f_last, f.f_first, AVG(c.max_enrl)
+FROM Faculty f JOIN Course_section c ON (f.f_id = c.f_id)
+GROUP BY f.f_last, f.f_first;
+
+--13
+SELECT f.f_last, f.f_first, COUNT(*) "Nr studenti"
+FROM Faculty f JOIN Student s ON (s.f_id = f.f_id)
+GROUP BY f.f_last, f.f_first
+HAVING COUNT(*) >= 3;
+
+--14
+-- daca nu stim exact ca exista o singura combinatie (course_section, loc_id) 
+-- cu numarul maxim de locuri, folosim HAVING
+SELECT curs.course_name, cs.max_enrl, cs.loc_id
+FROM Course curs JOIN Course_section cs ON (curs.course_no = cs.course_no)
+GROUP BY curs.course_name, cs.max_enrl, cs.loc_id, curs.course_no
+HAVING (SELECT COUNT(*) 
+        FROM Course_section c
+        WHERE c.course_no = curs.course_no AND c.max_enrl > cs.max_enrl) < 1;
+
+--15
+-- In caz ca nu trebuia media, ci valoarea mediana in lcc de "AVG" folosim "MEDIAN"
+SELECT t.term_desc, c.course_name, AVG(cs.max_enrl) "Avg enrollment"
+FROM Term t JOIN Course_section cs ON (t.term_id = cs.term_id)
+            JOIN Course c ON (c.course_no = cs.course_no)
+WHERE t.term_desc LIKE '%2007%'
+GROUP BY t.term_desc, c.course_name
+
+
+
+
+

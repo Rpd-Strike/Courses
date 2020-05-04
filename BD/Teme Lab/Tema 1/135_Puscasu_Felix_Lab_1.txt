@@ -1,0 +1,234 @@
+--- Tema Laborator 1 -- Baze de Date -- Puscasu Felix -- 135
+
+- Partea I
+
+1.  A)  1
+2.  C)  Catch_#22
+3.  C)  SUBSTR
+4.  C)  -
+5.      09-MAR-09
+6.      3 
+7.  D)  MAX
+
+
+- Partea II
+
+1.
+SELECT cust_id, cust_name
+FROM customer_TBL
+WHERE   cust_state IN ('IN', 'OH', 'MI', 'IL')
+    AND (   UPPER(cust_name) LIKE 'A%'
+         OR UPPER(cust_name) LIKE 'B%')
+ORDER BY cust_name;
+
+    "CUST_ID"	"CUST_NAME"
+    ---------------------------
+    "560"	    "ANDYS CANDIES"
+    "345"	    "ANGELA DOBKO"
+
+
+2. a)
+SELECT prod_id, prod_desc, cost
+FROM products_T
+WHERE cost >= 1 AND cost <= 12.5;
+
+    "PROD_ID"	"PROD_DESC"	                "COST"
+    ----------------------------------------------
+    "222"	    "PLASTIC PUMPKIN 18 INCH"	7.75
+    "13"	    "FALSE PARAFFIN TEETH"	    1.1
+    "15"	    "ASSORTED COSTUMES"	        10
+    "9"	        "CANDY CORN"	            1.35
+    "6"     	"PUMPKIN CANDY"	            1.45
+    "87"	    "PLASTIC SPIDERS"	        1.05
+    "119"	    "ASSORTED MASKS"	        4.95
+
+   b)
+SELECT prod_id, prod_desc, cost
+FROM products_TBL
+WHERE cost < 1 OR cost > 12.5;
+
+    "PROD_ID"	"PROD_DESC"	        "COST"
+    --------------------------------------
+    "11235" 	"WITCHES COSTUME"	29.99
+    "90"	    "LIGHTED LANTERNS"	14.5
+
+
+3.
+SELECT LOWER(first_name) || '.' || LOWER(last_name) || '@ittech.com' as "E-mail"
+FROM employee_tbl
+ORDER BY "E-mail";
+
+    "E-mail"         
+    ------------------------------             
+    "brandon.glass@ittech.com"    
+    "jacob.glass@ittech.com"      
+    "linda.plew@ittech.com"       
+    "mariah.wallace@ittech.com"   
+    "tiffany.spurgeon@ittech.com" 
+    "tina.stephens@ittech.com"    
+
+
+4.
+SELECT 'NAME = ' || last_name || ', ' || first_name || CHR(13)
+     || 'EMP_ID = ' || SUBSTR(emp_id, 0, 3) || '-' || SUBSTR(emp_id, 3, 2) || '-' || SUBSTR(emp_id, 5, 4) || CHR(13)
+     || 'PHONE = (' || SUBSTR(phone, 0, 3) || ')' || SUBSTR(phone, 3, 3) || '-' || SUBSTR(phone, 6, 4) || CHR(13)
+        as "Employee"
+FROM employee_TBL;
+
+    Employees                    
+    ------------------------
+    NAME = STEPHENS, TINA
+    EMP_ID = 311-15-4990
+    PHONE = (317)787-8446
+
+    NAME = PLEW, LINDA
+    EMP_ID = 442-23-4688
+    PHONE = (317)729-7899
+
+    NAME = GLASS, BRANDON
+    EMP_ID = 213-37-6455
+    PHONE = (317)789-8432
+
+    NAME = GLASS, JACOB
+    EMP_ID = 313-37-8243
+    PHONE = (317)754-5767
+
+    NAME = WALLACE, MARIAH
+    EMP_ID = 220-09-8433
+    PHONE = (317)733-2598
+
+    NAME = SPURGEON, TIFFANY
+    EMP_ID = 443-36-7901
+    PHONE = (317)756-7900
+
+
+5.
+SELECT emp_id, TO_CHAR(date_hire, 'YYYY') as "Anul angajarii"
+FROM employee_pay_tbl
+ORDER BY "Anul angajarii" ASC;
+
+    "EMP_ID"                      "Anul angajarii"   
+    ----------------------------------------------           
+    "311549902"                   "1989"                        
+    "442346889"                   "1990"                        
+    "443679012"                   "1991"                        
+    "213764555"                   "1994"                        
+    "220984332"                   "1996"                        
+    "313782439"                   "1997"                                      
+
+
+6.
+SELECT e.emp_id, e.last_name, e.first_name, p.salary, p.bonus
+FROM employee_tbl e FULL JOIN employee_pay_tbl p
+ON e.emp_id = p.emp_id;
+
+    "EMP_ID"            "LAST_NAME"         "FIRST_NAME"        "SALARY"          "BONUS"                       
+    ---------------------------------------------------------------------------------------
+    "311549902"         "STEPHENS"          "TINA"              "40000"           ""                            
+    "442346889"         "PLEW"              "LINDA"             ""                ""                            
+    "213764555"         "GLASS"             "BRANDON"           "30000"           "2000"                        
+    "313782439"         "GLASS"             "JACOB"             "20000"           "1000"                        
+    "220984332"         "WALLACE"           "MARIAH"            ""                ""                            
+    "443679012"         "SPURGEON"          "TIFFANY"           ""                ""                            
+
+
+7.
+SELECT c.cust_name, o.ord_num, o.ord_date
+FROM orders_tbl o LEFT JOIN customer_tbl c ON o.cust_id = c.cust_id
+WHERE UPPER(c.cust_state) LIKE 'I%';
+
+    "CUST_NAME"               "ORD_NUM"           "ORD_DATE"          
+    ----------------------------------------------------------          
+    "LESLIE GLEASON"          "56A901"            "22-OCT-99"                   
+    "WENDY WOLF"              "16C17"             "17-OCT-99"                   
+    "MARYS GIFT SHOP"         "56A917"            "30-SEP-99"                   
+    "SCOTTYS MARKET"          "23E934"            "15-OCT-99"                   
+    "SCHYLERS NOVELTIES"      "32A132"            "10-OCT-99"                   
+    "GAVINS PLACE"            "18D778"            "17-OCT-99"                
+
+
+8.
+SELECT o.ord_num, o.qty, e.first_name, e.last_name, e.city
+FROM orders_tbl o LEFT JOIN employee_tbl e ON o.sales_rep = e.emp_id;
+
+    "ORD_NUM"          "QTY"          "FIRST_NAME"       "LAST_NAME"        "CITY"      
+    ----------------------------------------------------------------------------------------                  
+    "56A901"           "1"            "BRANDON"          "GLASS"            "WHITELAND"                   
+    "56A917"           "100"          "BRANDON"          "GLASS"            "WHITELAND"                   
+    "32A132"           "25"           "JACOB"            "GLASS"            "INDIANAPOLIS"                
+    "16C17"            "2"            "BRANDON"          "GLASS"            "WHITELAND"                   
+    "18D778"           "10"           "LINDA"            "PLEW"             "INDIANAPOLIS"                
+    "23E934"           "20"           "JACOB"            "GLASS"            "INDIANAPOLIS"   
+
+
+9.
+SELECT o.ord_num, o.qty, e.first_name, e.last_name, e.city
+FROM orders_tbl o FULL JOIN employee_tbl e ON o.sales_rep = e.emp_id;
+
+    "ORD_NUM"        "QTY"        "FIRST_NAME"     "LAST_NAME"      "CITY"   
+    ------------------------------------------------------------------------------                     
+    ""               ""           "TINA"           "STEPHENS"       "GREENWOOD"                   
+    "18D778"         "10"         "LINDA"          "PLEW"           "INDIANAPOLIS"                
+    "16C17"          "2"          "BRANDON"        "GLASS"          "WHITELAND"                   
+    "56A917"         "100"        "BRANDON"        "GLASS"          "WHITELAND"                   
+    "56A901"         "1"          "BRANDON"        "GLASS"          "WHITELAND"                   
+    "23E934"         "20"         "JACOB"          "GLASS"          "INDIANAPOLIS"                
+    "32A132"         "25"         "JACOB"          "GLASS"          "INDIANAPOLIS"                
+    ""               ""           "MARIAH"         "WALLACE"        "INDIANAPOLIS"                
+    ""               ""           "TIFFANY"        "SPURGEON"       "INDIANAPOLIS"                
+
+
+10.
+SELECT *
+FROM employee_tbl
+WHERE middle_name is NULL;
+
+    "EMP_ID"            "LAST_NAME"         "FIRST_NAME"        "MIDDLE_NAME"       "ADDRESS"                "CITY"              "STATE"     "ZIP"       "PHONE"      
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------                 
+    "313782439"         "GLASS"             "JACOB"             ""                  "3789 WHITE RIVER BLVD"  "INDIANAPOLIS"      "IN"        "45734"     "3175457676"                  
+    "220984332"         "WALLACE"           "MARIAH"            ""                  "7889 KEYSTONE AVE"      "INDIANAPOLIS"      "IN"        "46741"     "3173325986"                  
+    "443679012"         "SPURGEON"          "TIFFANY"           ""                  "5 GEORGE COURT"         "INDIANAPOLIS"      "IN"        "46234"     "3175679007"                  
+
+
+11.
+SELECT emp_id, NVL(salary, 0) * 12 + NVL(bonus, 0) as "Annual Salary"
+FROM employee_pay_tbl
+ORDER BY "Annual Salary" DESC;
+
+    "EMP_ID"           "Annual Salary"   
+    ----------------------------------            
+    "311549902"        "480000"                      
+    "213764555"        "362000"                      
+    "313782439"        "241000"                      
+    "443679012"        "0"                           
+    "220984332"        "0"                           
+    "442346889"        "0"                           
+
+
+12.
+SELECT e.last_name, p.salary, p.position,
+    (CASE 
+        WHEN LOWER(p.position) = 'marketing' THEN 1.10
+        WHEN LOWER(p.position) = 'salesman' THEN 1.15
+        ELSE 1.0
+    END) * p.salary as "Salariu modificat"
+FROM employee_tbl e LEFT JOIN employee_pay_tbl p ON e.emp_id = p.emp_id;
+
+=============
+
+SELECT e.last_name, p.salary, p.position, 
+    DECODE(LOWER(p.position), 'marketing', 1.10,
+                       'salesman', 1.15,
+                       1.0) * p.salary as "Salariu Modificat"
+FROM employee_tbl e LEFT JOIN employee_pay_tbl p ON e.emp_id = p.emp_id;
+
+
+    "LAST_NAME"         "SALARY"            "POSITION"          "Salariu modificat"           
+    -------------------------------------------------------------------------------
+    "STEPHENS"          "40000"             "MARKETING"         "44000"                       
+    "PLEW"              ""                  "TEAM LEADER"       ""                            
+    "GLASS"             "30000"             "SALES MANAGER"     "30000"                       
+    "GLASS"             "20000"             "SALESMAN"          "23000"                       
+    "WALLACE"           ""                  "SHIPPER"           ""                            
+    "SPURGEON"          ""                  "SHIPPER"           ""                            
+                        
