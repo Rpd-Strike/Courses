@@ -72,6 +72,9 @@ void testSort(std::vector<int> valori, std::function<std::string(std::vector<int
 
     outs << cyan + sortName + reset << "  ... ";
 
+    auto copie = valori;
+    std::sort(copie.begin(), copie.end());
+
     Felix::Ticker::Ticker myClock;
     auto message = sortFunction(valori);
     double seconds = myClock.secondsSinceLastClock();
@@ -82,6 +85,14 @@ void testSort(std::vector<int> valori, std::function<std::string(std::vector<int
             outs << valori[i] << ' ';
         if (i > 0)
             ok &= (valori[i - 1] <= valori[i]);
+    }
+
+    if (valori.size() != copie.size())
+        ok = 0;
+    if (ok) {
+        for (size_t i = 0; i < valori.size(); ++i)
+            if (valori[i] != copie[i])
+                ok = 0;
     }
 
     outs << std::fixed << std::setprecision(3);
@@ -96,8 +107,8 @@ int main()
     Felix::Ticker::testFunction();
 
     int afis = 0;
-    std::ifstream fin("test.txt");
-    std::ofstream fout("results.txt");
+    std::ifstream fin("test2.txt");
+    std::ofstream fout("results2.txt");
     fout << "Tested different types of sorts:'\n";
     
     int nrTests;

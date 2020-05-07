@@ -19,13 +19,16 @@ namespace Sortari
 
         for( auto & x : v )
             q[0][x % BASE].push(x);
-        int qind = 1, put = BASE;
+        int qind = 0, put = BASE;
 
         while(valMax >= put) {
+            // cout << "hei\n";
+            qind ^= 1;
+
             for( int i = 0;  i < BASE;  ++i ) {
                 while( !q[1 ^ qind][i].empty() ) {
                     int x = q[1 ^ qind][i].front();
-                    /// std::cerr << x / put % BASE << ' ';
+                    //std::cerr << x / put % BASE << ' ';
                     q[1 ^ qind][i].pop();
                     q[qind][x / put % BASE].push(x);
                 }
@@ -33,14 +36,13 @@ namespace Sortari
             /// std::cerr << '\n';
             if( valMax / put < BASE )
                 break;
-            put *= BASE;
-            qind ^= 1;
+            put *= BASE;    
         }
         v.clear();
         for( int i = 0;  i < BASE;  ++i ) 
             while( !q[qind][i].empty() )
                 v.push_back(q[qind][i].front()),
                 q[qind][i].pop();
-        return "";
+        return "";  
     }
 }
