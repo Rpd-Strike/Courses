@@ -192,18 +192,26 @@ NFA LNFA::ToNFA() const
     };
 
     std::vector<NFA::EdgeList> new_edges(_total_states);
+    USet<int> set_of_final_nodes;
     VI new_is_final;
     /// Calculate new transitions skipping any possible lambda
     for (int node = 0;  node < _total_states;  ++node)
-        for (int to_lambda : ToLambda(node))
+        for (int to_lambda : ToLambda(node)) {
             for (const auto& [ch, to_nodes] : _edge[to_lambda])
                 if (ch != Constants::kLambda)
-                    for (int to_node : to_nodes)
+                    for (int to_node : to_nodes) {
                         new_edges[node][ch].insert(to_node);
+                        // std::cout << "Lambada move: " << node << ' ' << ch<<' '<<to_node<<'\n';
+                    }
+            if (IsFinal(node) || IsFinal(to_lambda))
+                set_of_final_nodes.insert(to_lambda),
+                set_of_final_nodes.insert(node);
+        }
     /// Get vector<int> for final states
     for (int node = 0; node < _total_states; ++node) 
-        if (IsFinal(node))
-            new_is_final.push_back(node);
+        if (IsFinal(node) || set_of_final_nodes.find(node) != set_of_final_nodes.end())
+            new_is_final.push_back(node),
+            std::cerr << "FFinal: " << node << ' ';
     
     return NFA(_total_states, _initial_states, new_is_final, new_edges);
 }  // TO DO

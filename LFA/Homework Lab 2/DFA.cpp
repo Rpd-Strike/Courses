@@ -214,6 +214,11 @@ void DFA::AlgRelabel()
     assert(nr_updated + cnt == _total_states);
     /// new number of states
     _total_states = nr_updated;    
+
+
+    if (_total_states == 0) {
+        *this = DFA();
+    }
 }
 
 int DFA::ToWhere(int node, char ch)
@@ -235,18 +240,23 @@ void DFA::Minimize()
     int nr_classes = 0;
     std::vector<int> clasa(_total_states);
     UMap<int, std::vector<int>> the_class;
-    for (int i = 0; i < _total_states; ++i)
-        the_class[_is_final[i]].push_back(i);
-    int old_nr_classes = the_class.size();
-    if (the_class.size() == 1u) {
-        if (the_class.begin()->first == 1) {
-            the_class[0] = the_class[1];
-            the_class.erase(1);
-        }
+    VI finals, not_finals;
+    for (int i = 0; i < _total_states; ++i) {
+        if (_is_final[i])
+            finals.push_back(i);
+        else 
+            not_finals.push_back(i);
     }
+    if (not finals.empty())
+        the_class[the_class.size()] = finals;
+    if (not not_finals.empty())
+        the_class[the_class.size()] = not_finals;
+
     nr_classes = the_class.size();
+    if (_total_states == 0)
+        std::cout << "I have " << _total_states << " number of states \n";
     assert(nr_classes > 0);
-    assert(nr_classes == old_nr_classes);
+
     for (const auto& [id, cl_nodes] : the_class)
         for (int node : cl_nodes)
             clasa[node] = id;
@@ -257,7 +267,7 @@ void DFA::Minimize()
             UMap<int, VI> splits;
             for (int node : the_class[id]) {
                 int to_class = ToWhere(node, ch);
-                if (to_class >= 0)
+                // if (to_class >= 0)
                     splits[to_class].push_back(node);
             }
             if (splits.size() > 1) {
@@ -332,4 +342,9 @@ void DFA::SetNotFinalState(int id)
         throw std::runtime_error("Setting non existent state in DFA");
         
     _is_final[id] = 0;
+}
+
+int DFA::GetStartNodeId() const
+{
+    return _initial_state;
 }

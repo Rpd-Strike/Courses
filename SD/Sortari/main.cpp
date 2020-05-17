@@ -15,9 +15,9 @@
 #include "Felix/Random.hpp"
 #include "Felix/Colors.hpp"
 
-const int NR_GEN = 1e7;
-const int MIC    = 0;
-const int MARE   = 1e6 - 1;
+const int NR_GEN = 2e6;
+const int MIC    = 1;
+const int MARE   = 2e9;
 
 std::vector<int> askUserForValues(int& afis)
 {
@@ -107,7 +107,7 @@ int main()
     Felix::Ticker::testFunction();
 
     int afis = 0;
-    std::ifstream fin("test2.txt");
+    std::ifstream fin("test.txt");
     std::ofstream fout("results2.txt");
     fout << "Tested different types of sorts:'\n";
     
@@ -121,15 +121,15 @@ int main()
 
         fout << "\nValori: [" << vmin << ", " << vmax << "]  N = " << count << "\n"; 
 
-        testSort(valori, Sortari::STLSort,    "STL    Sort    ", fout, afis);
+        // testSort(valori, Sortari::STLSort,    "STL    Sort    ", fout, afis);
         testSort(valori, Sortari::RadixSort,  "Radix  Sort    ", fout, afis);
-        testSort(valori, Sortari::MergeSort,  "Merge  Sort    ", fout, afis);
-        testSort(valori, Sortari::HeapSort,   "Heap   Sort    ", fout, afis);
-        testSort(valori, Sortari::CountSort,  "Count  Sort    ", fout, afis);
-        testSort(valori, Sortari::QuickSort1, "Quick  Sort - 1", fout, afis);
-        testSort(valori, Sortari::QuickSort3, "Quick  Sort - 3", fout, afis);
-        testSort(valori, Sortari::QuickSort5, "Quick  Sort - 5", fout, afis);
-        testSort(valori, Sortari::BubbleSort, "Bubble Sort    ", fout, afis);
+        // testSort(valori, Sortari::MergeSort,  "Merge  Sort    ", fout, afis);
+        // testSort(valori, Sortari::HeapSort,   "Heap   Sort    ", fout, afis);
+        // testSort(valori, Sortari::CountSort,  "Count  Sort    ", fout, afis);
+        // testSort(valori, Sortari::QuickSort1, "Quick  Sort - 1", fout, afis);
+        // testSort(valori, Sortari::QuickSort3, "Quick  Sort - 3", fout, afis);
+        // testSort(valori, Sortari::QuickSort5, "Quick  Sort - 5", fout, afis);
+        // testSort(valori, Sortari::BubbleSort, "Bubble Sort    ", fout, afis);
 
         std::cout << "test " << nr + 1 << " finished'\n";
     }   

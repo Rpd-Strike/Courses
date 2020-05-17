@@ -10,7 +10,7 @@
 namespace Constants
 {
     const char kLambda = '#';
-    const char kNotUsed = '@';
+    const char kEpsilon = '#';
     extern const std::string kSigma; 
 }
 

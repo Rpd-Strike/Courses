@@ -9,7 +9,7 @@ namespace Sortari
         using Felix::Colors::File::red;
         using Felix::Colors::File::reset;
 
-        const int BASE = 10;
+        const long long BASE = (1<< 16);
         const int valMax = *std::max_element(v.begin(), v.end());
         const int valMin = *std::min_element(v.begin(), v.end());
         if (valMin < 0) {
@@ -19,7 +19,7 @@ namespace Sortari
 
         for( auto & x : v )
             q[0][x % BASE].push(x);
-        int qind = 0, put = BASE;
+        long long qind = 0, put = BASE;
 
         while(valMax >= put) {
             // cout << "hei\n";

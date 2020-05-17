@@ -13,11 +13,12 @@ class DFA final : public Automata
 {
 public:
     typedef  UMap<char, int>   EdgeList;
+    int                   _total_states;
 
 protected:
     typedef  std::vector<int>  VI;
     
-    int                   _total_states;
+    
     int                   _initial_state;
     UMap<int, bool>       _is_final;
     std::vector<EdgeList> _edges;
@@ -50,6 +51,10 @@ public:
     void SetFinalState(int id); 
 
     void SetNotFinalState(int id);     
+
+    int GetStartNodeId() const;
+
+    friend class RegGram;
 };
 
 #endif // DFA_HPP_
