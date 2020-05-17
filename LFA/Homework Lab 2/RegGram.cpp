@@ -166,10 +166,8 @@ void RegGram::BuildFromDFA(const DFA& dfa)
             if (dfa._is_final.at(i) == true)
                 _productions[neterminals[i]].push_back({Constants::kEpsilon, ""});
         }
-        for (const auto& vec : dfa._edges) {
-            for (const auto& [ch_tran, to_node] : vec) {
-                _productions[neterminals[i]].push_back({ch_tran, neterminals[to_node]});
-            }
+        for (const auto& [ch_tran, to_node] : dfa._edges[i]) {
+            _productions[neterminals[i]].push_back({ch_tran, neterminals[to_node]});
         }
     }
 }

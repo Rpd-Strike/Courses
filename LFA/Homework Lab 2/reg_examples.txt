@@ -1,0 +1,59 @@
+S
+3
+S -> aA | bB
+B -> #
+A -> a
+
+
+-------
+
+A
+4
+A -> aB | cC | D
+B -> bA
+D -> xA
+C -> #
+
+
+-------
+
+S
+3
+S -> a | aA | bB | # 
+A -> aA | aS
+B -> cS | #
+
+
+---------
+SX
+4
+SX -> a | b | aA | bB | #
+S -> a | b | aA | bB
+A -> a | aA | aS
+B -> c | cS
+
+
+----
+From DFA to RegGram
+
+Number of states = 3
+Marime: 3
+Initial state = 0
+Number of final states = 2  
+Space enumerate the final states: 1 2
+Number of edges = 4
+0 1 a
+1 2 b
+0 2 c
+2 2 d
+
+or simply, test:
+3
+0
+2
+1 2
+4
+0 1 a
+1 2 b
+0 2 c
+2 2 d

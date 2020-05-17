@@ -38,6 +38,11 @@ void TestRegGram()
     cout << rg << '\n';
     cout << "======  Equivalent DFA: \n";
     cout << rg.ToDFA() << '\n';
+
+    DFA dfa;
+    cin >> dfa;
+    rg.BuildFromDFA(dfa);
+    cout << rg << '\n';
 }
 
 int main()
